@@ -29,10 +29,4 @@ public class HomeController {
 		mav.addObject("thirdItem", productService.newList().get(2));
 		return mav;
 	}
-//  
-//   @RequestMapping(value = "/springmvc", method = RequestMethod.GET)
-//   public ModelAndView springMVCPage() {
-//      ModelAndView mav = new ModelAndView("springmvc");
-//      return mav;
-//   }
 }
