@@ -13,12 +13,13 @@ import com.amazonweb.service.IProductService;
 
 @Service
 public class ProductService implements IProductService {
-	
+
 	@Autowired
 	private IProductDAO productDAO;
 
 	@Override
 	public List<Product> getAllProduct() {
+		System.out.println("IProductService" + productDAO.getAllProduct().size());
 		return productDAO.getAllProduct();
 	}
 
@@ -30,8 +31,7 @@ public class ProductService implements IProductService {
 
 	@Override
 	public void updateProduct(Product product) {
-		// TODO Auto-generated method stub
-
+		productDAO.updateProduct(product);
 	}
 
 	@Override
@@ -49,6 +49,15 @@ public class ProductService implements IProductService {
 			result.add(list.get(length - 1 - i));
 		}
 		return result;
+	}
+
+	@Override
+	public Product findById(Long id) {
+		if (productDAO.findById(id) == null) {
+			return null;
+		} else {
+			return productDAO.findById(id);
+		}
 	}
 
 }

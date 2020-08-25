@@ -21,7 +21,6 @@ public class HomeController {
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("web/home");
-//		System.out.println("All products: " + productService.getAllProduct().size());
 		mav.addObject("productModel", productService.getAllProduct());
 		mav.addObject("catalogModel", catalogService.getAllCatalog());
 		mav.addObject("firstItem", productService.newList().get(0));

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,12 +76,41 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 					statement.setInt(i + 1, (int) parameter);
 				} else if (parameter instanceof String) {
 					statement.setString(i + 1, (String) parameter);
+				} else if (parameter instanceof Timestamp) {
+					statement.setTimestamp(i + 1, (Timestamp) parameter);
+				} else if (parameter instanceof Double) {
+					statement.setDouble(i + 1, (Double) parameter);
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void update(String sql, Object... parameters) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql);
+			setParameter(preparedStatement, parameters);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 
 }

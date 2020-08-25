@@ -13,5 +13,5 @@ public interface IProductDAO extends IGenericDAO<Product> {
 	
 	void deleteProduct(Product product);
 	
-	
+	Product findById(Long id);
 }
