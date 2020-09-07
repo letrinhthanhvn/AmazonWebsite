@@ -1,73 +1,93 @@
 package com.amazonweb.model;
 
 public class User {
-	private long id;
+    private Integer id;
 
-	private String name;
+    private String name;
 
-	private String email;
+    private String username;
 
-	private String phone;
+    private String password;
 
-	private String address;
+    private String phone;
 
-	private String password;
+    private String email;
 
-	private int created;
+    private Integer created;
 
-	public long getId() {
-		return id;
-	}
+    private Integer role;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private Integer status;
 
-	public String getName() {
-		return name;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public int getCreated() {
-		return created;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setCreated(int created) {
-		this.created = created;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getCreated() {
+        return created;
+    }
+
+    public void setCreated(Integer created) {
+        this.created = created;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 }

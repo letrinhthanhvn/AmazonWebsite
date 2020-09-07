@@ -19,20 +19,23 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
 	}
 
 	@Override
-	public Product addProduct(Product product) {
-//		String sql 
-		return null;
+	public void addProduct(Product product) {
+		String sql = "INSERT INTO product (`catalog_id`, `name`, `price`, `description`, `discount`, `created`, `quantity`, `qty_buy_limit`, `image_list`) VALUES(?, ?, ?, ?, ? ,? ,? ,? ,?)";
+		update(sql, product.getCatalogId(), product.getName(), product.getPrice(), product.getDescription(),
+				product.getDiscount(), product.getCreated(), product.getQuantity(), product.getQuantity_limit(),
+				product.getImageList());
 	}
 
 	@Override
 	public void updateProduct(Product product) {
-		String sql = "UPDATE product SET catalog_id = ?, name = ?, price = ?, content = ?, discount = ?, image_link = ?, image_list = ?, view = ? where id = ?";
-		update(sql, product.getCatalogId(), product.getName(), product.getPrice(), product.getContent(), product.getDiscount(), product.getImageLink(), product.getImageList(), product.getView(), product.getId());
+		String sql = "UPDATE product SET catalog_id = ?, name = ?, price = ?, description = ?, discount = ?, image_list = ?, quantity =?, qty_buy_limit = ? where id = ?";
+		update(sql, product.getCatalogId(), product.getName(), product.getPrice(), product.getDescription(),
+				product.getDiscount(), product.getImageList(), product.getQuantity(), product.getQuantity_limit(),
+				product.getId());
 	}
 
 	@Override
 	public void deleteProduct(Product product) {
-		// TODO Auto-generated method stub
 
 	}
 

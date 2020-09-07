@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.amazonweb.dao.IGenericDAO;
 import com.amazonweb.mapper.RowMapper;
+import com.amazonweb.model.CatalogChild;
 
 @Repository
 public class AbstractDAO<T> implements IGenericDAO<T> {
@@ -20,7 +22,7 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/amazon";
+			String url = "jdbc:mysql://localhost:3306/onlineshopping";
 			String user = "root";
 			String password = "";
 			return DriverManager.getConnection(url, user, password);
@@ -46,6 +48,7 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 				}
 				return results;
 			} catch (SQLException e) {
+				e.printStackTrace();
 				return null;
 			} finally {
 				try {
@@ -59,6 +62,7 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 						rs.close();
 					}
 				} catch (SQLException e2) {
+					e2.printStackTrace();
 					return null;
 				}
 			}
@@ -88,6 +92,7 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 
 	}
 
+	@Override
 	public void update(String sql, Object... parameters) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -97,6 +102,7 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 			preparedStatement = connection.prepareStatement(sql);
 			setParameter(preparedStatement, parameters);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -106,6 +112,52 @@ public class AbstractDAO<T> implements IGenericDAO<T> {
 				}
 				if (preparedStatement != null) {
 					preparedStatement.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public Long insert(String sql, Object... parameters) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		Long id = null;
+		ResultSet rs = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(preparedStatement, parameters);
+			preparedStatement.executeUpdate();
+			rs = preparedStatement.getGeneratedKeys();
+			while (rs.next()) {
+				id = rs.getLong(1);
+			}
+			connection.commit();
+			return id;
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (rs != null) {
+					rs.close();
 				}
 			} catch (SQLException e2) {
 				e2.printStackTrace();

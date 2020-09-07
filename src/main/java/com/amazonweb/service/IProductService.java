@@ -7,7 +7,7 @@ import com.amazonweb.model.Product;
 public interface IProductService {
 	List<Product> getAllProduct();
 
-	Product addProduct(Product product);
+	void addProduct(Product product);
 
 	void updateProduct(Product product);
 

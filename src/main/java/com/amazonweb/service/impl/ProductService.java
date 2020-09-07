@@ -24,9 +24,8 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public Product addProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addProduct(Product product) {
+		productDAO.addProduct(product);
 	}
 
 	@Override

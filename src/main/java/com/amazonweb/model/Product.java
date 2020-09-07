@@ -6,23 +6,45 @@ public class Product {
 
 	private int catalogId;
 
-	private long userId;
-
 	private String name;
 
 	private double price;
 
-	private String content;
+	private String description;
 
 	private int discount;
-
-	private String imageLink;
 
 	private String imageList;
 
 	private int created;
 
-	private int view;
+	private int quantity_limit;
+	
+	private int quantity;
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getQuantity_limit() {
+		return quantity_limit;
+	}
+
+	public void setQuantity_limit(int quantity_limit) {
+		this.quantity_limit = quantity_limit;
+	}
 
 	public Long getId() {
 		return id;
@@ -38,14 +60,6 @@ public class Product {
 
 	public void setCatalogId(int catalogId) {
 		this.catalogId = catalogId;
-	}
-
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
 	}
 
 	public String getName() {
@@ -64,28 +78,12 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public int getDiscount() {
 		return discount;
 	}
 
 	public void setDiscount(int discount) {
 		this.discount = discount;
-	}
-
-	public String getImageLink() {
-		return imageLink;
-	}
-
-	public void setImageLink(String imageLink) {
-		this.imageLink = imageLink;
 	}
 
 	public String getImageList() {
@@ -100,16 +98,8 @@ public class Product {
 		return created;
 	}
 
-	public void setCreated(int created) {
-		this.created = created;
-	}
-
-	public long getView() {
-		return view;
-	}
-
-	public void setView(int view) {
-		this.view = view;
+	public void setCreated(int time) {
+		this.created = time;
 	}
 
 }
